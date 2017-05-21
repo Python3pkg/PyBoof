@@ -19,11 +19,11 @@ class TestMemMapFunctions(unittest.TestCase):
 
         self.assertEqual(len(original), len(found))
 
-        for i in xrange(len(original)):
+        for i in range(len(original)):
             a = original[i]
             b = found[i]
             self.assertEqual(len(a),len(b))
-            for j in xrange(len(a)):
+            for j in range(len(a)):
                 self.assertEqual(a[j],b[j])
 
     def test_convert_list_Point2DF64(self):
@@ -39,7 +39,7 @@ class TestMemMapFunctions(unittest.TestCase):
 
         self.assertEqual(len(original), len(found))
 
-        for i in xrange(len(original)):
+        for i in range(len(original)):
             a = original[i]
             b = found[i]
             self.assertEquals(a[0], b[0])

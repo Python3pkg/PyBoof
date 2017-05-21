@@ -45,7 +45,7 @@ class JavaConfig:
     attributes
     """
     def __init__(self, java_class_path ):
-        if isinstance(java_class_path, basestring):
+        if isinstance(java_class_path, str):
             self.java_class_path = java_class_path
 
             words = java_class_path.replace('$',".").split(".")
@@ -84,7 +84,7 @@ class JavaConfig:
 
     def __dir__(self):
         return sorted(set(
-                self.__dict__.keys() + self.java_fields))
+                list(self.__dict__.keys()) + self.java_fields))
 
 
 class JavaList(JavaWrapper):

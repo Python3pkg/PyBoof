@@ -1,5 +1,5 @@
-from image import *
-from ip import *
+from .image import *
+from .ip import *
 
 
 # TODO add intrinsic parameters

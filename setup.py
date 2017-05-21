@@ -27,24 +27,24 @@ class MyBuild(build_py):
             # See if javac is available for compiling the java code
             if check_for_command("javac"):
                 if call(["bash", "gradlew", "allJar"]) != 0:
-                    print "Gradle build failed."
+                    print("Gradle build failed.")
                     exit(1)
             else:
-                print "javac isn't installed on your systems.  exiting now"
+                print("javac isn't installed on your systems.  exiting now")
                 # TODO Should download instead if possible?
                 exit(1)
         except Exception as e:
-            print "Exception message:"
-            print str(e)
-            print e.message
-            print
+            print("Exception message:")
+            print(str(e))
+            print(e.message)
+            print()
             if not os.path.isfile('python/pyboof/PyBoof-all.jar'):
-                print "Gradle build failed AND there is no PyBoof-all.jar"
-                print ""
-                print "Did you run build as a regular user first?"
-                print "    ./setup.py build"
-                print "Is Gradle and Java installed?  Test by typing the following:"
-                print "    gradle allJar"
+                print("Gradle build failed AND there is no PyBoof-all.jar")
+                print("")
+                print("Did you run build as a regular user first?")
+                print("    ./setup.py build")
+                print("Is Gradle and Java installed?  Test by typing the following:")
+                print("    gradle allJar")
                 exit(1)
         build_py.run(self)
 

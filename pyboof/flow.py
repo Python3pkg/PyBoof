@@ -1,5 +1,5 @@
-from image import *
-import ip
+from .image import *
+from . import ip
 
 class GradientFlow:
     def __init__(self, derivX, derivY):

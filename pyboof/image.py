@@ -6,7 +6,7 @@ import py4j.java_gateway as jg
 import pyboof
 from pyboof import gateway
 
-import common
+from . import common
 
 
 class Family:
@@ -83,7 +83,7 @@ def load_single_band( path , dtype ):
     boof_type = dtype_to_Class_SingleBand(dtype)
     found = gateway.jvm.boofcv.io.image.UtilImageIO.loadImage(file_path,boof_type)
     if found is None:
-        print file_path
+        print(file_path)
         raise Exception("Can't find image or image format can't be read")
     return found
 
@@ -205,11 +205,11 @@ def boof_to_ndarray( boof ):
         else:
             # create copy the very slow way
             N = len(boof_data)
-            print "Before painful copy {}".format(N)
+            print("Before painful copy {}".format(N))
             data = [0]*N
-            for i in xrange(N):
+            for i in range(N):
                 data[i] = boof_data[i]
-            print "After painful copy"
+            print("After painful copy")
             return np.ndarray(shape=(height,width), dtype=nptype, buffer=np.array(data))
     else:
         raise Exception("Only single band supported so far")
@@ -497,7 +497,7 @@ def mmap_boof_to_numpy_F32(boof_image):
     data = struct.unpack('>{}f'.format(width*height), raw_data)
 
     if len(data) != width*height:
-        print "Unexpected data length. {}".format(len(data))
+        print("Unexpected data length. {}".format(len(data)))
 
     # create array in java format then convert into native format
     tmp = np.ndarray(shape=(height, width), dtype='>f4', order='C', buffer=raw_data)

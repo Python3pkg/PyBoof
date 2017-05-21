@@ -10,8 +10,8 @@ for pid in pids:
         text = open(os.path.join('/proc', pid, 'cmdline'), 'rb').read()
         if 'PyBoof' in text:
             os.kill(int(pid), signal.SIGTERM)
-            print "Killed "+pid
+            print("Killed "+pid)
     except IOError: # proc has already terminated
         continue
 
-print "Done"
+print("Done")

@@ -17,29 +17,29 @@ d = ConfigFastHessian()
 detector = FactoryDetectDescribe(np.uint8).createSurf(config_detect=d,config_desc=c)
 
 before = time.time()
-print "Start detect"
+print("Start detect")
 locations,descriptions = detector.detect(original)
-print "End detect "+str(time.time()-before)
+print("End detect "+str(time.time()-before))
 
-print "Total found = {} {}".format(locations.size(),descriptions.size())
+print("Total found = {} {}".format(locations.size(),descriptions.size()))
 
 before = time.time()
 python_lists = java_list_to_python(locations)
 after = time.time()
 
-print "Took {} seconds to convert point list".format(after-before)
+print("Took {} seconds to convert point list".format(after-before))
 
 before = time.time()
 descriptions.save_to_disk("raw_desc_file.data")
 after = time.time()
 
-print "Took {} seconds to save descriptions list".format(after-before)
+print("Took {} seconds to save descriptions list".format(after-before))
 
 before = time.time()
 read_list("raw_desc_file.data")
 after = time.time()
 
-print "Took {} seconds to read descriptions list".format(after-before)
+print("Took {} seconds to read descriptions list".format(after-before))
 
 # before = time.time()
 # python_descriptions = java_list_to_python(descriptions)

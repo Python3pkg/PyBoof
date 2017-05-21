@@ -1,7 +1,7 @@
 import math
 import numpy as np
 import py4j.java_gateway as jg
-from common import *
+from .common import *
 
 
 def real_ejml_to_nparray( ejml ):
@@ -9,8 +9,8 @@ def real_ejml_to_nparray( ejml ):
     num_cols = ejml.getNumCols()
 
     M = np.zeros((num_rows,num_cols))
-    for i in xrange(num_rows):
-        for j in xrange(num_cols):
+    for i in range(num_rows):
+        for j in range(num_cols):
             M[i,j] = ejml.unsafe_get(i,j)
     return M
 
@@ -19,8 +19,8 @@ def real_nparray_to_ejml( array ):
     num_cols = array.shape[1]
 
     M = gateway.jvm.org.ejml.data.DenseMatrix64F(num_rows,num_cols)
-    for i in xrange(num_rows):
-        for j in xrange(num_cols):
+    for i in range(num_rows):
+        for j in range(num_cols):
             M.unsafe_set(i,j,array[i,j])
     return M
 

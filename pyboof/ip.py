@@ -1,8 +1,8 @@
 from pyboof import gateway
 
-from common import JavaConfig
-from common import JavaWrapper
-from image import dtype_to_Class_SingleBand
+from .common import JavaConfig
+from .common import JavaWrapper
+from .image import dtype_to_Class_SingleBand
 
 
 class Border:

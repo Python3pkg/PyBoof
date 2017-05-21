@@ -5,9 +5,9 @@ from pyboof import JavaConfig
 from pyboof import JavaWrapper
 from pyboof import dtype_to_Class_SingleBand
 from pyboof import gateway
-from common import JavaList
-from common import JavaList_to_fastqueue
-from common import is_java_class
+from .common import JavaList
+from .common import JavaList_to_fastqueue
+from .common import is_java_class
 
 
 def p2b_list_descF64(pylist):
@@ -170,7 +170,7 @@ class AssociateDescription(JavaWrapper):
 
         self.java_obj.associate()
         matches = self.java_obj.getMatches()
-        for i in xrange(matches.getSize()):
+        for i in range(matches.getSize()):
             association = matches.get(i)
             output.append( (association.src,association.dst,association.score) )
 
@@ -182,10 +182,10 @@ class AssociateDescription(JavaWrapper):
 
 def read_list_tuple_desc_f64(f, list_length):
     output = []
-    for i in xrange(list_length):
+    for i in range(list_length):
         desc_length = struct.unpack('>i', f.read(4))[0]
         desc = [0.0]*desc_length
-        for j in xrange(desc_length):
+        for j in range(desc_length):
             desc[j] = struct.unpack('>d', f.read(8))[0]
         output.append(desc)
     return output
@@ -214,12 +214,12 @@ def java_list_to_python(java_list):
     N = java_list.size()
     output = []
     if is_java_class(java_list.java_type,"boofcv.struct.feature.TupleDesc_F64"):
-        for i in xrange(N):
+        for i in range(N):
             d = java_list.java_obj.get(i)
             value = d.getValue() # some hackery to get around py4j short comings
             output.append([x for x in value])
     elif is_java_class(java_list.java_type,"georegression.struct.point.Point2D_F64"):
-        for i in xrange(N):
+        for i in range(N):
             p = java_list.java_obj.get(i)
             output.append((p.x,p.y))
     else:
@@ -254,14 +254,14 @@ class DetectDescribePointFeatures(JavaWrapper):
     def get_scales(self):
         N = self.java_obj.getNumberOfFeatures()
         output = [0]*N
-        for i in xrange(N):
+        for i in range(N):
             output[i] = self.java_obj.getScale(i)
         return output
 
     def get_orientations(self ):
         N = self.java_obj.getNumberOfFeatures()
         output = [0]*N
-        for i in xrange(N):
+        for i in range(N):
             output[i] = self.java_obj.getOrientation(i)
         return output
 
@@ -432,7 +432,7 @@ def mmap_list_TupleF64_to_python(java_list, pylist):
             raise Exception("Unexpected data type in mmap file. {%d}" % data_type)
         if num_found > num_elements-num_read:
             raise Exception("Too many elements returned. "+str(num_found))
-        for i in xrange(num_found):
+        for i in range(num_found):
             desc = struct.unpack(">%sd" % dof, mm.read(8*dof))
             pylist.append(desc)
         num_read += num_found
@@ -485,7 +485,7 @@ def mmap_list_Point2DF64_to_python( java_list , pylist ):
             raise Exception("Unexpected data type in mmap file. %d" % data_type)
         if num_found > num_elements-num_read:
             raise Exception("Too many elements returned. "+str(num_found))
-        for i in xrange(num_found):
+        for i in range(num_found):
             desc = struct.unpack(">2d", mm.read(8*2))
             pylist.append(desc)
         num_read += num_found

@@ -1,5 +1,5 @@
-from geo import *
-from image import *
+from .geo import *
+from .image import *
 
 
 class ConfigPolygonDetector(JavaConfig):
